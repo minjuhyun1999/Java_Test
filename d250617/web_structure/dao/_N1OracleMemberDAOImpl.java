@@ -186,7 +186,7 @@ public class _N1OracleMemberDAOImpl implements _9DAO_Inaterface {
             // int result = pstmt.executeUpdate(query);
             int result = pstmt.executeUpdate();
             System.out.println("6-2. 전송 후 완료");
-            System.out.println(result + " 개의 데이터가 저장됨");
+            System.out.println(result + " 개의 데이터가 수정됨");
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -218,9 +218,22 @@ public class _N1OracleMemberDAOImpl implements _9DAO_Inaterface {
     }
 
     @Override
-    public boolean delete(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public boolean delete(int member_id) {
+        // 실제 테이블에서, 회원 아이디로 삭제하기.
+        // _6JDBC_Delete 파일 참고해서 작업하기.
+        try {
+            conn = _4DBConnectionManager.getConnection();
+            String query = "DELETE FROM MEMBER501 WHERE ID = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, member_id);
+            int result = pstmt.executeUpdate();
+            System.out.println(result + " 개의 데이터가 삭제됨");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            _4DBConnectionManager.close(null, pstmt, conn);
+        }
+        return true;
     }
 
     @Override

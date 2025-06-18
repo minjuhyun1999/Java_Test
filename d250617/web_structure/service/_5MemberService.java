@@ -88,6 +88,14 @@ public class _5MemberService {
         dao.update(member);
     }
 
+    // 0618, , 회원 삭제
+    public void deleteMember(int member_id) {
+        System.out.println("삭제 진행하기. ");
+        // dao에서, 삭제하는 기능 구현.
+        boolean result = dao.delete(member_id);
+        System.out.println("삭제 했나요? : " + result);
+    }
+
     // 0617 순서3, 해당 기능 수정.
     // 변경 전
     // 1) csv 파일에서 회원 목록 불러오기. loadMembersFromFile()
@@ -154,6 +162,8 @@ public class _5MemberService {
     }
 
     // 3) JTable에 회원 데이터 반영 (새로고침), 전체 모든 회원 조회
+    // tableModel : 가상 테이블, 회원 정보를 , 테이블, 행,열 구성.
+    // JTable : 출력용 테이블 연결.
     public void refreshTable() {
         tableModel.setRowCount(0); // 기존 데이터 모두 제거, 모든 행 삭제,
         for (_10Member member : members) {
